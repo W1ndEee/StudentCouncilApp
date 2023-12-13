@@ -1,0 +1,5 @@
+﻿StudentID,Name,YearLevel,Email,Password,VoteStatus
+123456789,Person,7,1@you.com,1234,FALSE
+987654321,Human,9,2@you.com,1234,FALSE
+234567890,Bean,10,3@you.com,1234,FALSE
+198765432,People,8,4@you.com,1234,FALSE
