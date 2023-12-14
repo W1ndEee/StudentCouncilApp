@@ -1,26 +1,23 @@
-import java.awt.EventQueue;
-import java.awt.Font;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+package App;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.sql.*;
-import java.io.*;
-import java.util.Properties;
-import java.lang.Integer.*;
 
-public class AddCandidate1 extends JFrame {
+public class AddVoter1 extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField namefield;
 	private JTextField yearfield;
 	private JTextField idfield;
+	private JTextField fingerprintfield;
+	private JTextField emailfield;
+	private JTextField passwordfield;
 
 	/**
 	 * Launch the application.
@@ -29,7 +26,7 @@ public class AddCandidate1 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddCandidate1 frame = new AddCandidate1();
+					AddVoter1 frame = new AddVoter1();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +38,7 @@ public class AddCandidate1 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AddCandidate1() {
+	public AddVoter1() {
 		setBounds(100, 100, 450, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(900, 600);
@@ -52,63 +49,84 @@ public class AddCandidate1 extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblAddVoter = new JLabel("Add/Remove Candidate");
+		JLabel lblAddVoter = new JLabel("Add Voter");
 		lblAddVoter.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAddVoter.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
-		lblAddVoter.setBounds(255, 47, 425, 48);
+		lblAddVoter.setBounds(225, 47, 425, 48);
 		getContentPane().add(lblAddVoter);
 		
 		JLabel lblFullName = new JLabel("Full Name:");
 		lblFullName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFullName.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblFullName.setBounds(171, 215, 214, 50);
+		lblFullName.setBounds(171, 118, 214, 50);
 		getContentPane().add(lblFullName);
-		JButton btnLogout = new JButton("Logout");
-		btnLogout.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				AltLogin1 altlog = new AltLogin1();
-				altlog.setVisible(true);
-			}
-		});
-		btnLogout.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		btnLogout.setBounds(754, 48, 140, 38);
-		getContentPane().add(btnLogout);
 		
 		namefield = new JTextField();
 		namefield.setColumns(10);
-		namefield.setBounds(349, 215, 256, 50);
+		namefield.setBounds(349, 118, 256, 50);
 		getContentPane().add(namefield);
 		
 		JLabel lblYearLevel = new JLabel("Year Level:");
 		lblYearLevel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblYearLevel.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblYearLevel.setBounds(171, 277, 214, 50);
+		lblYearLevel.setBounds(171, 180, 214, 50);
 		getContentPane().add(lblYearLevel);
 		
 		yearfield = new JTextField();
 		yearfield.setColumns(10);
-		yearfield.setBounds(349, 277, 256, 50);
+		yearfield.setBounds(349, 180, 256, 50);
 		getContentPane().add(yearfield);
 		
 		JLabel lblStudentId = new JLabel("Student ID:");
 		lblStudentId.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStudentId.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblStudentId.setBounds(171, 339, 214, 50);
+		lblStudentId.setBounds(171, 242, 214, 50);
 		getContentPane().add(lblStudentId);
 		
 		idfield = new JTextField();
 		idfield.setColumns(10);
-		idfield.setBounds(349, 339, 256, 50);
+		idfield.setBounds(349, 242, 256, 50);
 		getContentPane().add(idfield);
+		
+		JLabel lblFingerprintId = new JLabel("Fingerprint ID:");
+		lblFingerprintId.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFingerprintId.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblFingerprintId.setBounds(156, 304, 214, 50);
+		getContentPane().add(lblFingerprintId);
+		
+		fingerprintfield = new JTextField();
+		fingerprintfield.setColumns(10);
+		fingerprintfield.setBounds(349, 304, 256, 50);
+		getContentPane().add(fingerprintfield);
+		
+		JLabel lblSchoolEmail = new JLabel("School Email:");
+		lblSchoolEmail.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSchoolEmail.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblSchoolEmail.setBounds(166, 366, 214, 50);
+		getContentPane().add(lblSchoolEmail);
+		
+		emailfield = new JTextField();
+		emailfield.setColumns(10);
+		emailfield.setBounds(349, 366, 256, 50);
+		getContentPane().add(emailfield);
+		
+		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblPassword.setBounds(171, 428, 214, 50);
+		getContentPane().add(lblPassword);
+		
+		passwordfield = new JTextField();
+		passwordfield.setColumns(10);
+		passwordfield.setBounds(349, 428, 256, 50);
+		getContentPane().add(passwordfield);
 		
 		JButton btnBackToList = new JButton("Back to list");
 		btnBackToList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				CandidateList1 candlist = new CandidateList1();
-				candlist.setVisible(true);
-				
+				VoterList1 voterlist = new VoterList1();
+				voterlist.setVisible(true);
 			}
 		});
 		btnBackToList.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
@@ -123,6 +141,8 @@ public class AddCandidate1 extends JFrame {
 				String inputname = namefield.getText();
 				String inputyear = yearfield.getText();
 				String inputid = idfield.getText();
+				String inputemail = emailfield.getText();
+				String inputpassword = passwordfield.getText();
 				int intyear = Integer.valueOf(inputyear);
 				int intid = Integer.valueOf(inputid);
 				
@@ -165,67 +185,11 @@ public class AddCandidate1 extends JFrame {
 				
 				JOptionPane.showMessageDialog(null, "Candidate added: " + inputname + ", Year " + intyear + ", Student ID: " + intid);
 				JOptionPane.showMessageDialog(null, "If you made a mistake, don't change any values in the text field and click Revert/Delete.");
-				
 			}
 		});
 		btnConfirm.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		btnConfirm.setBounds(434, 510, 171, 38);
 		getContentPane().add(btnConfirm);
-		
-		JButton btnRevert = new JButton("Revert/Delete");
-		btnRevert.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Connection c = null;
-			    Statement stmt = null;
-				String inputname = namefield.getText();
-				String inputyear = yearfield.getText();
-				String inputid = idfield.getText();
-				int intyear = Integer.valueOf(inputyear);
-				int intid = Integer.valueOf(inputid);
-				
-				try {
-			         Class.forName("org.postgresql.Driver");
-			         c = DriverManager
-			            .getConnection("jdbc:postgresql://localhost:5432/daniel");
-			         c.setAutoCommit(false);
-			         stmt = c.createStatement();
-			         
-			         stmt = c.createStatement();
-			         String sql = "DELETE FROM TEST3 WHERE NAME = '" + inputname + "'";
-			         stmt.execute(sql); 
-			         
-			         stmt = c.createStatement();
-			         ResultSet rs = stmt.executeQuery( "SELECT * FROM TEST3 ORDER BY STUDENTID ASC;" );
-			         while ( rs.next() ) {
-			            int studentid = rs.getInt("studentid");
-			            String  name = rs.getString("name");
-			            int yearlevel  = rs.getInt("yearlevel");
-			            int  votes = rs.getInt("votes");
-			            String picture = rs.getString("picture");
-			            System.out.println( "STUDENTID = " + studentid );
-			            System.out.println( "NAME = " + name );
-			            System.out.println( "YEARLEVEL = " + yearlevel );
-			            System.out.println( "VOTES = " + votes );
-			            System.out.println( "PICTURE = " + picture );
-			            System.out.println();
-			         }
-			         rs.close(); 
-					 stmt.close();
-			         c.commit();
-			         c.close();
-			         
-			      } catch ( Exception x ) {
-			         System.err.println( x.getClass().getName()+": "+ x.getMessage() );
-			         System.exit(0);
-			      }
-				
-				JOptionPane.showMessageDialog(null, "Candidate " + inputname + " removed.");
-				
-			}
-		});
-		btnRevert.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		btnRevert.setBounds(700, 510, 171, 38);
-		contentPane.add(btnRevert);
 	}
 
 }

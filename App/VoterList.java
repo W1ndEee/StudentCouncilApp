@@ -1,11 +1,17 @@
-import javax.swing.border.EmptyBorder;
-import java.awt.event.*;
-import javax.swing.*;
-import java.awt.*;
+package App;
 
-public class VoterList1 extends JFrame {
+import java.awt.EventQueue;
 
-	private JPanel contentPane;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import javax.swing.JList;
+
+public class VoterList {
+
+	private JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -14,8 +20,8 @@ public class VoterList1 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VoterList1 frame = new VoterList1();
-					frame.setVisible(true);
+					VoterList window = new VoterList();
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -24,68 +30,56 @@ public class VoterList1 extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Create the application.
 	 */
-	public VoterList1() {
-		setBounds(100, 100, 450, 300);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(900, 600);
-		getContentPane().setLayout(null);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+	public VoterList() {
+		initialize();
+	}
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(900, 600);
+		frame.getContentPane().setLayout(null);
 		
 		JButton btnRemoveVoter = new JButton("Remove Voter");
 		btnRemoveVoter.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		btnRemoveVoter.setBounds(569, 528, 171, 38);
-		getContentPane().add(btnRemoveVoter);
+		frame.getContentPane().add(btnRemoveVoter);
 		
 		JButton btnAddVoter = new JButton("Add Voter");
-		btnAddVoter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				AddVoter1 addvoter = new AddVoter1();
-				addvoter.setVisible(true);
-			}
-		});
 		btnAddVoter.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		btnAddVoter.setBounds(296, 528, 171, 38);
-		getContentPane().add(btnAddVoter);
+		frame.getContentPane().add(btnAddVoter);
 		
 		JButton btnSearchByStatus = new JButton("Search by status");
 		btnSearchByStatus.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		btnSearchByStatus.setBounds(16, 361, 171, 38);
-		getContentPane().add(btnSearchByStatus);
+		frame.getContentPane().add(btnSearchByStatus);
 		
 		JButton btnSearchByYear = new JButton("Search by Year");
 		btnSearchByYear.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		btnSearchByYear.setBounds(16, 276, 171, 38);
-		getContentPane().add(btnSearchByYear);
+		frame.getContentPane().add(btnSearchByYear);
 		
 		JButton btnSearchByName = new JButton("Search by Name");
 		btnSearchByName.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		btnSearchByName.setBounds(16, 192, 171, 38);
-		getContentPane().add(btnSearchByName);
+		frame.getContentPane().add(btnSearchByName);
 		
 		JButton btnBackToMenu = new JButton("Back to menu");
-		btnBackToMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				AdminPage1 adminp = new AdminPage1();
-				adminp.setVisible(true);
-			}
-		});
 		btnBackToMenu.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		btnBackToMenu.setBounds(16, 21, 171, 38);
-		getContentPane().add(btnBackToMenu);
+		frame.getContentPane().add(btnBackToMenu);
 		
 		JLabel lblVoterList = new JLabel("Voter List");
 		lblVoterList.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVoterList.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
 		lblVoterList.setBounds(324, 18, 268, 48);
-		getContentPane().add(lblVoterList);
+		frame.getContentPane().add(lblVoterList);
 	}
-
 }
